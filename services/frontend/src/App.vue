@@ -25,7 +25,7 @@
           <a target="_blank" :href="'mailto:' + email" style="text-decoration: none" class="caption">{{ email }}</a>
 
           <v-card
-            class="mx-auto mt-4"
+            class="mx-auto mt-4 hidden-sm-and-down"
             max-width="300"
             outlined
           >
@@ -57,6 +57,21 @@
         </v-col>
       </v-row>
     </v-container>
+    <v-bottom-navigation
+    class="hidden-md-and-up"
+    v-model="app"
+    color="deep-purple accent-4"
+    horizontal
+    style="position: absolute;
+    bottom: 0px;"
+  >
+    <v-btn 
+      v-for="(a, i) in apps"
+      :key="i">
+      <span>{{a['text']}}</span>
+      <v-icon>{{a['icon']}}</v-icon>
+    </v-btn>
+  </v-bottom-navigation>
   </v-app>
 </template>
 
@@ -83,17 +98,17 @@ export default {
     app: 0,
     apps: [
       {
-        icon: "",
+        icon: "mdi-history",
         text: "Profile",
         rel_path: "/profile"
       },
       {
-        icon: "",
+        icon: "mdi-heart",
         text: "Logs",
         rel_path: "/logs"
       },
       {
-        icon: "",
+        icon: "mdi-map-marker",
         text: "Blog",
         rel_path: "/blog"
       },
