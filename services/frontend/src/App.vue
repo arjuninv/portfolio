@@ -98,19 +98,19 @@ export default {
     app: 0,
     apps: [
       {
-        icon: "mdi-history",
+        icon: "mdi-account",
         text: "Profile",
         rel_path: "/profile"
       },
       {
-        icon: "mdi-heart",
-        text: "Logs",
-        rel_path: "/logs"
-      },
-      {
-        icon: "mdi-map-marker",
+        icon: "mdi-post-outline",
         text: "Blog",
         rel_path: "/blog"
+      },
+      {
+        icon: "mdi-format-list-bulleted-triangle",
+        text: "Logs",
+        rel_path: "/logs"
       },
     ]
   }),
