@@ -15,7 +15,7 @@ spec:
         backend:
           serviceName: interstellar-frontend-service
           servicePort: 80
-      - path: /api/[A-Za-z0-9]+/profile
+      - path: /api/profile
         backend:
           serviceName: interstellar-profile-api-service
           servicePort: 8081
