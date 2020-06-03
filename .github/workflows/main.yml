@@ -35,6 +35,7 @@ jobs:
         clusterName: ${{ secrets.KUBE_CLUSTER_NAME }}
         expirationTime: "300"
         version: "1.17.4"
+    - uses: actions/checkout@v2
     - name: Apply configuration files 
       run: |
         cd kubernetes
