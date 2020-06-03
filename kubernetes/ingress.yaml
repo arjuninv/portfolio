@@ -5,7 +5,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/add-base-url: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    # nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
   - host: arjuninventor.com
@@ -15,7 +15,11 @@ spec:
         backend:
           serviceName: interstellar-frontend-service
           servicePort: 80
-      - path: /api/.*\b(\w)./profile/*
+      - path: /api/[A-Za-z0-9]+/profile
+        backend:
+          serviceName: interstellar-profile-api-service
+          servicePort: 8081
+      - path: /api/profile/*
         backend:
           serviceName: interstellar-profile-api-service
           servicePort: 8081

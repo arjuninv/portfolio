@@ -45,6 +45,9 @@ jobs:
         kubectl apply -f frontend_deployment.yaml
         kubectl apply -f frontend_service.yaml
         kubectl apply -f frontend_autoscaler.yaml
+        kubectl rollout restart deployment interstellar-frontend-deployment
         kubectl apply -f profile_api_deployment.yaml
         kubectl apply -f profile_api_service.yaml
         kubectl apply -f profile_api_autoscaler.yaml
+        kubectl rollout restart deployment interstellar-profile-api-deployment
+        
