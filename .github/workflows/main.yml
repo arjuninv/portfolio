@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@prod
+    - uses: actions/checkout@v2
     - name: Publish to Docker Registry (Service - frontend)
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
