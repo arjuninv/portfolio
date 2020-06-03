@@ -35,7 +35,7 @@ export default {
     methods: {
         update_page(rel_path) {
          // fetch(`/api/${this.PROFILE_API_VERSION}/profile/page/`)
-            fetch(`http://localhost:8081/api/v1/profile/page${rel_path}`)
+            fetch(`/api/${this.PROFILE_API_VERSION}/profile/page${rel_path}`)
             .then(response => response.json())
             .then(j => {
                 this.contents = j.content

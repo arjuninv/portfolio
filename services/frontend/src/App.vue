@@ -100,8 +100,8 @@ export default {
     ]
   }),
   mounted() {
-    // fetch(`/api/${this.PROFILE_API_VERSION}/profile`)
-    fetch(`http://localhost:8081/api/v1/profile`)
+    fetch(`/api/${this.PROFILE_API_VERSION}/profile`)
+    // fetch(`http://localhost:8081/api/v1/profile`)
     .then(response => response.json())
     .then(j => {
       this.name = j.data.name

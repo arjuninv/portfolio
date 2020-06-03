@@ -15,19 +15,7 @@ spec:
         backend:
           serviceName: interstellar-frontend-service
           servicePort: 80
-      # - path: /api/*
-      #   backend:
-      #     serviceName: interstellar-profile-api-service
-      #     servicePort: 8081
-      # - path: /signup
-      #   backend:
-      #     serviceName: microlearn-web-service
-      #     servicePort: 80
-      # - path: /auth
-      #   backend:
-      #     serviceName: microlearn-auth-service
-      #     servicePort: 8081
-      # - path: /ping
-      #   backend:
-      #     serviceName: microlearn-auth-service
-      #     servicePort: 8081
+      - path: /api/.*\b(\w)./profile/*
+        backend:
+          serviceName: interstellar-profile-api-service
+          servicePort: 8081
