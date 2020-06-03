@@ -1,0 +1,19 @@
+name: CI
+on:
+  push:
+    branches: [ prod ]
+#   pull_request:
+#     branches: [ prod ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@prod
+    - name: Publish to Docker Registry (Service - frontend)
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: ${{ secrets.DOCKER_USERNAME }}/interstellar-frontend
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        workdir: /services/frontend/
