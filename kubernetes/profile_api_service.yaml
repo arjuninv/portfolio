@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: interstellar-profile-api-service
+spec:
+  type: NodePort
+  selector:
+    app: interstellar-profile-api
+  ports:
+  - name: "port-1"
+    port: 8081
+    protocol: TCP
+    targetPort: 8081

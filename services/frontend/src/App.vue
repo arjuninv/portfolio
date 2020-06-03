@@ -1,0 +1,132 @@
+<template>
+  <v-app>
+    <div>
+      <v-app-bar
+        color="black"
+        dark
+      >
+      <v-toolbar-title>{{apps[app].text}}</v-toolbar-title>
+      <v-spacer></v-spacer>
+    </v-app-bar>
+    </div>
+    <v-container style="max-width: 1280px;">
+      <v-row class="d-flex align-content-start flex-wrap flex-column flex-sm-row">
+        <v-col
+          :cols="12"
+          sm="3"   
+        >
+          <v-img
+              style="border-radius: 4px"
+              :src="img_src"
+              :lazy-src="lazy_img_src"
+            ></v-img>
+          <h2 class="headline mt-4">{{ name }}</h2>
+          <span>{{ bio }}</span><br>
+          <a target="_blank" :href="'mailto:' + email" style="text-decoration: none" class="caption">{{ email }}</a>
+
+          <v-card
+            class="mx-auto mt-4"
+            max-width="300"
+            outlined
+          >
+            <v-list dense>
+              <v-list-item-group v-model="app" color="deep-purple accent-4">
+                <v-list-item
+                  v-for="(app, i) in apps"
+                  :key="i"
+                >
+                  <v-list-item-icon>
+                    <v-icon v-text="app.icon"></v-icon>
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title v-text="app.text"></v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list-item-group>
+            </v-list>
+          </v-card>
+
+        </v-col>
+        <v-col
+          :cols="12"
+          sm="9"  
+        >
+          <Profile v-if="app == 0 && pages" :pages="pages" />
+          <Logs v-if="app == 1" />
+  
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-app>
+</template>
+
+<script>
+
+import Profile from './Pages/Profile'
+import Logs from './Pages/Logs'
+
+export default {
+  name: 'App',
+
+  components: {
+    Profile,
+    Logs
+  },
+
+  data: () => ({
+    img_src: "",
+    lazy_img_src: "",
+    name: "",
+    bio: "",
+    email: "",
+    pages: [],
+    app: 0,
+    apps: [
+      {
+        icon: "",
+        text: "Profile",
+        rel_path: "/profile"
+      },
+      {
+        icon: "",
+        text: "Logs",
+        rel_path: "/logs"
+      },
+      {
+        icon: "",
+        text: "Blog",
+        rel_path: "/blog"
+      },
+    ]
+  }),
+  mounted() {
+    // fetch(`/api/${this.PROFILE_API_VERSION}/profile`)
+    fetch(`http://localhost:8081/api/v1/profile`)
+    .then(response => response.json())
+    .then(j => {
+      this.name = j.data.name
+        this.bio = j.data.bio
+        this.img_src = j.data.img_src
+        this.lazy_img_src = j.data.lazy_img_src
+        this.email = j.data.email
+        this.pages = j.data.pages
+    });
+    this.apps.forEach((element, index) => {
+        if(element.rel_path == '/' + this.$route.name) {
+          this.app = index
+        }
+    });
+
+  },
+  methods: {
+    app_change(index) {
+    this.$router.push({path: this.apps[index].rel_path + "/"})
+    }
+  },
+  watch: {
+    app: function(val) {
+      this.app_change(val);
+    }
+  }
+};
+</script>

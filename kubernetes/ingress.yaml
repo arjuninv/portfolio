@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1beta1 # for versions before 1.14 use extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/add-base-url: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: arjuninventor.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: interstellar-frontend-service
+          servicePort: 80
+      # - path: /api/*
+      #   backend:
+      #     serviceName: interstellar-profile-api-service
+      #     servicePort: 8081
+      # - path: /signup
+      #   backend:
+      #     serviceName: microlearn-web-service
+      #     servicePort: 80
+      # - path: /auth
+      #   backend:
+      #     serviceName: microlearn-auth-service
+      #     servicePort: 8081
+      # - path: /ping
+      #   backend:
+      #     serviceName: microlearn-auth-service
+      #     servicePort: 8081

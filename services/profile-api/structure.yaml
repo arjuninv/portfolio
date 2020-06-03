@@ -1,0 +1,20 @@
+last_updated: 31/5/2020
+data:
+  name: Arjun S
+  bio: Inventor / Entrepreneur
+  email: arjun.santhoshkumar@gmail.com
+  img_src: https://avatars3.githubusercontent.com/u/19463218?s=400&u=728e78a36322a040f92ef8efca9988eb1a00625c&v=4
+  lazy_img_src: https://avatars3.githubusercontent.com/u/19463218?s=60&v=4
+  pages:
+   - title: About
+     rel_path: /
+   - title: Projects
+     rel_path: /projects
+   - title: Awards & Recognitions
+     rel_path: /awards-recognitions
+   - title: Events
+     rel_path: /events
+   - title: Videos & Photos
+     rel_path: /videos-photos
+
+
