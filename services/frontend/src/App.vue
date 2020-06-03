@@ -2,18 +2,22 @@
   <v-app>
     <div>
       <v-app-bar
-        color="black"
-        dark
+        fixed
+        color="white"
+        elevate-on-scroll
       >
       <v-toolbar-title>{{apps[app].text}}</v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-btn color="black" tile text href="https://github.com/ArjunInventor/portfolio/" target="_blank">Source</v-btn>
     </v-app-bar>
     </div>
+    <div style="height: 64px"></div>
     <v-container style="max-width: 1280px;">
-      <v-row class="d-flex align-content-start flex-wrap flex-column flex-sm-row">
+      <v-row class="d-flex align-content-start flex-wrap flex-column flex-md-row">
         <v-col
           :cols="12"
-          sm="3"   
+          md="3"
+          sm="4"   
         >
           <v-img
               style="border-radius: 4px"
@@ -49,7 +53,7 @@
         </v-col>
         <v-col
           :cols="12"
-          sm="9"  
+          md="9"  
         >
           <Profile v-if="app == 0 && pages" :pages="pages" />
           <Logs v-if="app == 1" />
@@ -116,7 +120,7 @@ export default {
   }),
   mounted() {
     fetch(`/api/profile`)
-    // fetch(`http://localhost:8081/api/v1/profile`)
+    // fetch(`http://localhost:8081/`)
     .then(response => response.json())
     .then(j => {
       this.name = j.data.name
@@ -145,3 +149,7 @@ export default {
   }
 };
 </script>
+
+<style>
+  html { overflow-y: auto }
+</style>
