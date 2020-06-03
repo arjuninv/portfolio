@@ -16,4 +16,4 @@ jobs:
         name: ${{ secrets.DOCKER_USERNAME }}/interstellar-frontend
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        workdir: /services/frontend/
+        path: /services/frontend/
