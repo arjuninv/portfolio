@@ -62,7 +62,7 @@
     v-model="app"
     color="deep-purple accent-4"
     horizontal
-    style="position: absolute;
+    style="position: fixed;
     bottom: 0px;"
   >
     <v-btn 
