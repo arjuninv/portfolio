@@ -123,7 +123,7 @@ export default {
     ]
   }),
   mounted() {
-    fetch(`https://arjuninventor.com/api/profile`)
+    fetch(`/api/profile`)
     // fetch(`http://localhost:8081/`)
     .then(response => response.json())
     .then(j => {
@@ -147,7 +147,11 @@ export default {
     }
   },
   watch: {
+    '$route' (to) {
+        document.title = to.meta.title || 'Arjun S'
+    },
     app: function(val) {
+      if (val != this.app)
       this.app_change(val);
     }
   }

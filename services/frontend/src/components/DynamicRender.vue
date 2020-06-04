@@ -41,7 +41,7 @@ export default {
     methods: {
         update_page(rel_path) {
          this.loading = true;
-            fetch(`https://arjuninventor.com/api/profile/page${rel_path}`)
+            fetch(`/api/profile/page${rel_path}`)
             .then(response => response.json())
             .then(j => {
                 this.contents = j.content;

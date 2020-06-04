@@ -25,3 +25,11 @@ spec:
         backend:
           serviceName: interstellar-profile-api-service
           servicePort: 8081
+      - path: /api/logs
+        backend:
+          serviceName: interstellar-logs-api-service
+          servicePort: 8082
+      - path: /api/logs/?(.*)
+        backend:
+          serviceName: interstellar-logs-api-service
+          servicePort: 8082

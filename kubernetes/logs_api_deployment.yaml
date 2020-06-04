@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: interstellar-logs-api-deployment
+  labels:
+    app: interstellar-logs-api
+spec:
+  selector:
+    matchLabels:
+      app: interstellar-logs-api
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: interstellar-logs-api
+    spec:
+      containers:
+      - name: interstellar-logs-api
+        image: arjuninventor/interstellar-logs-api:latest
+        env:
+         - name: DB_HOST
+           value: database-1.cphslqgda4qb.us-east-2.rds.amazonaws.com
+         - name: DB_USER
+           value: admin
+         - name: DB_PASSWORD
+           value: password
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8082
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "20m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+

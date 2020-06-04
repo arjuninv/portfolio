@@ -8,19 +8,15 @@
           color="deep-purple accent-4"
           outlined
         ></v-select>
-        <v-row no-gutters style="flex-wrap: nowrap;">
-            <v-col
-                class="flex-grow-1 flex-shrink-0"
-            >
-            <p>{{logs_map[selected_log].description}}</p>
-            </v-col>
-
-            <v-col
-                class="flex-grow-0 flex-shrink-0"
-            >
-            <v-btn outlined color="deep-purple accent-4">Subscribe</v-btn>
-            </v-col>
-        </v-row>
+        <div v-if="data != null">
+            <v-card outlined
+                class="pa-4 pb-1"
+                v-for="item in data"
+                :key="item.timestamp">
+                    <p>{{item.data}}</p>
+                    <p width="100%" class="overline text-right">{{item.timestamp}}</p>
+            </v-card>
+        </div>
     </div>
 </template>
 
@@ -29,25 +25,39 @@ export default {
     name: 'Logs',
     data: () => ({
         logs: [],
-        logs_map: {},
+        data: null,
         selected_log: null
     }),
     mounted() {
-        fetch(`http://localhost:8082`)
-        // fetch(`http://localhost:8081/`)
+        fetch(`/api/logs`)
         .then(response => response.json())
         .then(j => {
-            this.logs = j.data.logs
-            this.selected_log = this.logs[0].name
-            this.logs.forEach((element, index) => {
-                this.logs_map[element.name] = {  index: index,
-                                            rel_path: element.rel_path,
-                                            description: element.description
-                                        }
-            });
+            this.logs = j.logs
+            if(this.$route.params.log) {
+                this.selected_log = this.$route.params.log
+            } else {
+                this.selected_log = this.logs[0]
+            }
         });
-        
-
     },
+    watch: {
+        selected_log: {
+            immediate: false, 
+            handler(val) {
+                        console.log("asd")
+
+                if (val && val != this.$route.params.log) {
+                    this.$router.push({ path: '/logs/' + val})
+                } else if (val) {
+                     fetch(`/api/logs/log/${val}`)
+                    .then(response => response.json())
+                    .then(j => {
+                        console.log(j.logs)
+                        this.data = j.logs
+                    });
+                }
+            }
+        }
+    }
 }
 </script>

@@ -16,13 +16,19 @@ def ping():
 
 @app.route(f'/', methods=["GET"])
 def log():
-    structure = yaml.safe_load(manager.get_structure()) 
-    return jsonify(structure)
+    return jsonify({"logs": manager.get_structure()})
 
 @app.route(f'/log/<name>', methods=["GET"])
-def log_name(name):
-    name_data = yaml.safe_load(manager.get_page(name)) 
-    return jsonify(name_data)
+def log_name(name): 
+    return jsonify({"logs": manager.get_log(name)})
+
+@app.route(f'/add_log/<name>', methods=["GET"])
+def add_log(name):
+    if 'data' in request.args:
+        if manager.add_log(name, request.args.get("data")):
+            return jsonify({"status": "ok"})
+        else:
+            return jsonify({"status": "error"})
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 8082))

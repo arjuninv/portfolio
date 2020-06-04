@@ -1,1 +1,3 @@
 services/frontend/node_modules
+services/profile-api/add_creds.bat
+services/logs-api/add_creds.bat
