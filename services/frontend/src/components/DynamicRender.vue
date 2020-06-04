@@ -1,5 +1,10 @@
 <template>
     <div>
+        <v-progress-linear
+            indeterminate
+            color="deep-purple accent-4"
+            v-if="loading"
+        ></v-progress-linear>
         <div v-for="content in contents" :key="content.id">
             <!-- Paragraph -->
             <div>
@@ -28,17 +33,19 @@
 <script>
 export default {
     name: 'DynamicRender',
+    loading: true,
     props: ['page'],
     data: () => ({
         contents: [],
     }),
     methods: {
         update_page(rel_path) {
-         // fetch(`/api/${this.PROFILE_API_VERSION}/profile/page/`)
-            fetch(`/api/profile/page${rel_path}`)
+         this.loading = true;
+            fetch(`https://arjuninventor.com/api/profile/page${rel_path}`)
             .then(response => response.json())
             .then(j => {
-                this.contents = j.content
+                this.contents = j.content;
+                this.loading = false;
             });                
         }
     },

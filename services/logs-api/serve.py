@@ -1,31 +1,28 @@
+import os
+import yaml
 from flask import Flask, request, jsonify
-import jwt
+from flask_cors import CORS
+
+from _helpers import db
+
+manager = db.manager()
 
 app = Flask(__name__)
+CORS(app)
 
-@app.route('/ping', methods=["GET"])
+@app.route('/health-check', methods=["GET"])
 def ping():
     return "ok"
 
+@app.route(f'/', methods=["GET"])
+def log():
+    structure = yaml.safe_load(manager.get_structure()) 
+    return jsonify(structure)
 
-@app.route('/auth', methods=["POST"])
-def auth():
-    data=request.json
-    if data['type'] == "create_account":
-        if all([x in data for x in ['username', 'password', 'email']]):
-            encode_data = {
-                'username': data['username'], 
-                'email': data['email']
-                }
-            try:
-                access_token = jwt.encode(encode_data,'secret', algorithm='HS256')
-                return jsonify(
-                    {"status": "ok",
-                    "access_token": access_token})
-            except:
-                return jsonify({"status": "error"})
-        else:
-            return jsonify({"status": "error"})
+@app.route(f'/log/<name>', methods=["GET"])
+def log_name(name):
+    name_data = yaml.safe_load(manager.get_page(name)) 
+    return jsonify(name_data)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=8081)
+    app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT', 8082))

@@ -26,7 +26,7 @@
             ></v-img>
           <h2 class="headline mt-4">{{ name }}</h2>
           <span>{{ bio }}</span><br>
-          <a target="_blank" :href="'mailto:' + email" style="text-decoration: none" class="caption">{{ email }}</a>
+          <a target="_blank" :href="'mailto:' + email" style="text-decoration: none" class="deep-purple--text text--accent-4 caption">{{ email }}</a>
 
           <v-card
             class="mx-auto mt-4 hidden-sm-and-down"
@@ -55,11 +55,13 @@
           :cols="12"
           md="9"  
         >
-          <Profile v-if="app == 0 && pages" :pages="pages" />
-          <Logs v-if="app == 1" />
+          <Profile v-if="apps[app].text == 'Profile' && pages" :pages="pages" />
+          <Logs v-if="apps[app].text == 'Logs'" />
+          <Blog v-if="apps[app].text == 'Blog'" />
   
         </v-col>
       </v-row>
+      <div class="hidden-md-and-up" style="height: 56px"></div>
     </v-container>
     <v-bottom-navigation
     class="hidden-md-and-up"
@@ -82,6 +84,7 @@
 <script>
 
 import Profile from './Pages/Profile'
+import Blog from './Pages/Blog'
 import Logs from './Pages/Logs'
 
 export default {
@@ -89,7 +92,8 @@ export default {
 
   components: {
     Profile,
-    Logs
+    Logs,
+    Blog
   },
 
   data: () => ({
@@ -119,7 +123,7 @@ export default {
     ]
   }),
   mounted() {
-    fetch(`/api/profile`)
+    fetch(`https://arjuninventor.com/api/profile`)
     // fetch(`http://localhost:8081/`)
     .then(response => response.json())
     .then(j => {
