@@ -10,7 +10,7 @@
         ></v-select>
         <div v-if="data != null">
             <v-card outlined
-                class="pa-4 pb-1"
+                class="pa-4 pb-1 mb-2"
                 v-for="item in data"
                 :key="item.timestamp">
                     <p>{{item.data}}</p>
