@@ -21,9 +21,9 @@ export default {
       posts: []
   }),
   mounted() {
-      fetch('https://thingproxy.freeboard.io/fetch/https://medium.com/feed/@Arjuninventor')
-        .then(response => response.text())
-        .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+      fetch('https://api.allorigins.win/get?url=https://medium.com/feed/@Arjuninventor')
+        .then(response => response.json())
+        .then(str => (new window.DOMParser()).parseFromString(str.contents, "text/xml"))
         .then(data => {
             this.posts = []
             var posts_obj = data.getElementsByTagName('channel')[0].children;

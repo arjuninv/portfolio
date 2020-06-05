@@ -139,11 +139,10 @@ export default {
           this.app = index
         }
     });
-
   },
   methods: {
     app_change(index) {
-    this.$router.push({path: this.apps[index].rel_path + "/"})
+      this.$router.push({path: this.apps[index].rel_path + "/"})
     }
   },
   watch: {
@@ -151,8 +150,7 @@ export default {
         document.title = to.meta.title || 'Arjun S'
     },
     app: function(val) {
-      if (val != this.app)
-      this.app_change(val);
+        this.app_change(val);
     }
   }
 };
