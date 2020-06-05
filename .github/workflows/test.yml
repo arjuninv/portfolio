@@ -1,0 +1,22 @@
+
+name: CI
+
+on:
+  push:
+    branches: [ prod ]
+
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Telegram Notification
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            **Job Status:** ${{job.status}}
+            **Run info:** https://github.com/ArjunInventor/portfolio/actions/runs/${{github.run_id}}
+            **Initiated by:** ${{github.actor}}
+
