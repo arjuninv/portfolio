@@ -15,8 +15,5 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          args: |
-            **Job Status:** ${{job.status}}
-            **Run info:** https://github.com/ArjunInventor/portfolio/actions/runs/${{github.run_id}}
-            **Initiated by:** ${{github.actor}}
+          args: hello
 
