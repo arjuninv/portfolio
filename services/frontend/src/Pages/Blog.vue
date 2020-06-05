@@ -1,7 +1,10 @@
 <template>
     <div>
-        Blog
-
+        <v-progress-linear
+            indeterminate
+            color="deep-purple accent-4"
+            v-if="loading"
+        ></v-progress-linear>
         <v-card
             outlined
             class="post mt-5"
@@ -18,7 +21,8 @@
 export default {
   name: 'App',
   data: () => ({
-      posts: []
+      posts: [],
+      loading: true
   }),
   mounted() {
       fetch('https://api.allorigins.win/get?url=https://medium.com/feed/@Arjuninventor')
@@ -42,6 +46,7 @@ export default {
                         this.posts.push(post)
                     }
             });
+            this.loading = false;
         })
   }
 }

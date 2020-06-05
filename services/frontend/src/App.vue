@@ -29,6 +29,7 @@
           <a target="_blank" :href="'mailto:' + email" style="text-decoration: none" class="deep-purple--text text--accent-4 caption">{{ email }}</a>
 
           <v-card
+            v-if="!loading"
             class="mx-auto mt-4 hidden-sm-and-down"
             max-width="300"
             outlined
@@ -62,6 +63,9 @@
         </v-col>
       </v-row>
       <div class="hidden-md-and-up" style="height: 56px"></div>
+      <v-overlay :value="loading">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
     </v-container>
     <v-bottom-navigation
     class="hidden-md-and-up"
@@ -97,6 +101,7 @@ export default {
   },
 
   data: () => ({
+    loading: true,
     img_src: "",
     lazy_img_src: "",
     name: "",
@@ -127,6 +132,7 @@ export default {
     // fetch(`http://localhost:8081/`)
     .then(response => response.json())
     .then(j => {
+      this.loading = false
       this.name = j.data.name
         this.bio = j.data.bio
         this.img_src = j.data.img_src

@@ -6,6 +6,7 @@
           item-text="name"
           label="Select log"
           color="deep-purple accent-4"
+          :loading="loading"
           outlined
         ></v-select>
         <div v-if="data != null">
@@ -26,12 +27,14 @@ export default {
     data: () => ({
         logs: [],
         data: null,
-        selected_log: null
+        selected_log: null,
+        loading: true
     }),
     mounted() {
         fetch(`/api/logs`)
         .then(response => response.json())
         .then(j => {
+            this.loading = false
             this.logs = j.logs
             if(this.$route.params.log) {
                 this.selected_log = this.$route.params.log
