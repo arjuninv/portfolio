@@ -49,20 +49,29 @@ jobs:
     - name: Apply configuration files 
       run: |
         cd kubernetes
-        kubectl apply -f ingress.yaml
         kubectl apply -f frontend_deployment.yaml
         kubectl apply -f frontend_service.yaml
         kubectl apply -f frontend_autoscaler.yaml
-        kubectl rollout restart deployment interstellar-frontend-deployment
+        kubectl scale deployment interstellar-frontend-deployment --replicas=0
+        sleep 5
+        kubectl scale deployment interstellar-frontend-deployment --replicas=1
+        
         kubectl apply -f profile_api_deployment.yaml
         kubectl apply -f profile_api_service.yaml
         kubectl apply -f profile_api_autoscaler.yaml
-        kubectl rollout restart deployment interstellar-profile-api-deployment
+        kubectl scale deployment interstellar-profile-api-deployment --replicas=0
+        sleep 5
+        kubectl scale deployment interstellar-profile-api-deployment --replicas=1
+        
+        kubectl apply -f logs_api_deployment.yaml
+        kubectl apply -f logs_api_service.yaml
+        kubectl apply -f logs_api_autoscaler.yaml
+        kubectl scale deployment interstellar-logs-api-deployment --replicas=0
+        sleep 5
+        kubectl scale deployment interstellar_frontend_deployment --replicas=1
+        
         kubectl apply -f ingress.yaml
-        kubectl apply -f frontend_deployment.yaml
-        kubectl apply -f frontend_service.yaml
-        kubectl apply -f frontend_autoscaler.yaml
-        kubectl rollout restart deployment interstellar-frontend-deployment
+
   notify:
     runs-on: ubuntu-latest
     needs: deploy
@@ -73,7 +82,9 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            **Job Status:** ${{job.status}}
-            **Run info:** https://github.com/ArjunInventor/portfolio/actions/runs/${{github.run_id}}
-            **Initiated by:** ${{github.actor}}
+            ${{github.event.commits[0].message}}
+            
+            Job Status: ${{job.status}}
+            Run info: https://github.com/ArjunInventor/portfolio/actions/runs/${{github.run_id}}
+            Initiated by: ${{github.actor}}
 
