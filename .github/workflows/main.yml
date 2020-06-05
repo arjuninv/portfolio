@@ -80,5 +80,5 @@ jobs:
             Run info: https://github.com/ArjunInventor/portfolio/actions/runs/${{github.run_id}}
             Initiated by: ${{github.actor}}
           to: arjun.santhoshkumar@gmail.com
-          from: ${{ secrets.MAIL_USERNAME }}
+          from: GitHub Actions
         
