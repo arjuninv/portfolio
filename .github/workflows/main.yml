@@ -68,17 +68,12 @@ jobs:
     needs: deploy
     steps:
       - name: Email Notification
-        uses: dawidd6/action-send-mail@v2.2.0
+        uses: appleboy/telegram-action@master
         with:
-          server_address: smtp.gmail.com
-          server_port: 465
-          username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORD }}
-          subject: "Job Status: ${{job.status}} | Portfolio - Arjun S"
-          body: |
-            Job Status: ${{job.status}}
-            Run info: https://github.com/ArjunInventor/portfolio/actions/runs/${{github.run_id}}
-            Initiated by: ${{github.actor}}
-          to: arjun.santhoshkumar@gmail.com
-          from: GitHub Actions
-        
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message:  |
+            **Job Status:** ${{job.status}}
+            **Run info:** https://github.com/ArjunInventor/portfolio/actions/runs/${{github.run_id}}
+            **Initiated by:** ${{github.actor}}
+
