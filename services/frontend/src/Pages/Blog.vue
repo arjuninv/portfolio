@@ -1,5 +1,7 @@
 <template>
     <div>
+        <div class="hidden-md-and-up mt-0" style="height: 10px; overflow: auto; white-space: nowrap; margin-left: -13px; width: 100vw; box-shadow: -2px 7px 14px -10px rgba(0, 0, 0, 0.2)">
+        </div>
         <v-progress-linear
             indeterminate
             color="deep-purple accent-4"
@@ -7,7 +9,7 @@
         ></v-progress-linear>
         <v-card
             outlined
-            class="post mt-5"
+            class="post mb-5"
             v-for="post in posts"
             :key="post.title"
             >

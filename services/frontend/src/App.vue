@@ -12,10 +12,10 @@
     </v-app-bar>
     </div>
     <div style="height: 64px"></div>
-    <v-container style="max-width: 1280px;">
+    <v-container class="pt-0" style="max-width: 1280px;">
       <v-row class="d-flex align-content-start flex-wrap flex-column flex-md-row">
         <v-col
-          class="ma-0"
+          class="ma-0 py-0"
           :cols="12"
           md="3"
         >

@@ -68,7 +68,7 @@ jobs:
         kubectl apply -f logs_api_autoscaler.yaml
         kubectl scale deployment interstellar-logs-api-deployment --replicas=0
         sleep 5
-        kubectl scale deployment interstellar-frontend-deployment --replicas=1
+        kubectl scale deployment interstellar-logs-api-deployment --replicas=1
         
         kubectl apply -f ingress.yaml
 

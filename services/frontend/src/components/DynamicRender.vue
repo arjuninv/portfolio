@@ -1,8 +1,17 @@
 <template>
-    <div>
+    <div class="pt-0">
         <v-progress-linear
+            class="hidden-md-and-up"        
             indeterminate
-            color="deep-purple accent-4"
+            color="deep-purple accent-4 mt-0"
+            style="margin-left: -20px; width: 100vw;"
+            v-if="loading"
+        ></v-progress-linear>
+        <v-progress-linear
+            class="hidden-sm-and-down"
+            indeterminate
+            color="deep-purple accent-4 mt-0"
+            style="margin-left: -8px;"
             v-if="loading"
         ></v-progress-linear>
         <div v-for="content in contents" :key="content.id">
