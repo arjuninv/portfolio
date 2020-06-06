@@ -31,7 +31,7 @@ export default {
         loading: true
     }),
     mounted() {
-        fetch(`/api/logs`)
+        fetch(`${this.$host}/api/logs`)
         .then(response => response.json())
         .then(j => {
             this.loading = false

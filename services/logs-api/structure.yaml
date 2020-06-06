@@ -1,3 +1,0 @@
-last_updated: 4/6/20||ndata:||n logs:||n - name: Thoughts||n   description: A stream of random thoughts. Kinda like twitter ig. But not really? Idk||n   rel_path: /thoughts||n - name: app-log||n   description: Logs from endpoint /api/log/:name ||n   rel_path: /app-log||n ||n 
-
-

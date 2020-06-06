@@ -15,18 +15,48 @@
     <v-container style="max-width: 1280px;">
       <v-row class="d-flex align-content-start flex-wrap flex-column flex-md-row">
         <v-col
+          class="ma-0"
           :cols="12"
           md="3"
-          sm="4"   
         >
-          <v-img
-              style="border-radius: 4px"
-              :src="img_src"
-              :lazy-src="lazy_img_src"
-            ></v-img>
-          <h2 class="headline mt-4">{{ name }}</h2>
-          <span>{{ bio }}</span><br>
-          <a target="_blank" :href="'mailto:' + email" style="text-decoration: none" class="deep-purple--text text--accent-4 caption">{{ email }}</a>
+        <v-row>
+          <v-col 
+            :cols="5"
+            :md="12"
+            sm="3"  
+          >
+            <v-card
+              outlined
+              ripple
+              >
+              <v-img
+                style="border-radius: 4px"
+                :src="img_src"
+                :lazy-src="lazy_img_src"
+              ></v-img>
+            </v-card>
+          </v-col>
+          <v-col 
+            :cols="7"
+            :md="12"
+            sm="5"
+          >
+            <h2 class="headline mt-4">{{ name }}</h2> 
+            <span class="text--secondary">{{ bio }}</span><br>
+            <!-- <div class="mt-2">
+              <v-chip
+                class="mr-2 deep-purple--text"
+                color="deep-purple accent-2"
+                target="_blank" :href="'mailto:' + email"
+                outlined
+              >
+                <v-icon left>mdi-email</v-icon>
+                Email
+              </v-chip>
+            </div> -->
+            <a target="_blank" :href="'mailto:' + email" style="text-decoration: none" class="deep-purple--text text--accent-4 caption">{{ email }}</a>
+          </v-col>
+        </v-row>
 
           <v-card
             v-if="!loading"
@@ -128,8 +158,7 @@ export default {
     ]
   }),
   mounted() {
-    fetch(`/api/profile`)
-    // fetch(`http://localhost:8081/`)
+    fetch(`${this.$host}/api/profile`)
     .then(response => response.json())
     .then(j => {
       this.loading = false
