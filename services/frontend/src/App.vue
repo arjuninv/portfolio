@@ -13,7 +13,7 @@
     </div>
     <div style="height: 64px"></div>
     <v-container class="pt-0" style="max-width: 1280px;">
-      <v-row class="d-flex align-content-start flex-wrap flex-column flex-md-row">
+      <v-row v-if="!loading" class="d-flex align-content-start flex-wrap flex-column flex-md-row">
         <v-col
           class="ma-0 py-0"
           :cols="12"
@@ -59,7 +59,6 @@
         </v-row>
 
           <v-card
-            v-if="!loading"
             class="mx-auto mt-4 hidden-sm-and-down"
             max-width="300"
             outlined
@@ -181,8 +180,11 @@ export default {
     }
   },
   watch: {
-    '$route' (to) {
+    '$route': {
+      immediate: true,
+      handler (to) {
         document.title = to.meta.title || 'Arjun S'
+      }
     },
     app: function(val) {
         this.app_change(val);

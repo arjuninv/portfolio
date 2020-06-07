@@ -16,6 +16,6 @@ export const router = new Router({
     { path: '/logs/:log', name: 'logs', component: App, meta: {title: 'Arjun S - Logs'}},
     { path: '/blog', name: 'blog', component: App, meta: {title: 'Arjun S - Blog'}},
     { path: '/admin', name: 'admin', component: Admin, meta: {title: 'Arjun S - Admin'}},
-    { path: '/*', redirect: '/profile/' }
+    { path: '/*', redirect: '/profile/', meta: {title: 'Arjun S - Profile'}}
   ]
 });

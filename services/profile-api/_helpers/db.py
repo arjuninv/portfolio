@@ -12,14 +12,17 @@ class manager:
             database=DB_NAME
         )
 
-        self.mycursor = self.mydb.cursor()
 
     def get_structure(self):
+        self.mycursor = self.mydb.cursor()
         self.mycursor.execute('SELECT * FROM root where id="structure"')
         myresult = self.mycursor.fetchone()
         return myresult[1].replace('||n', '\n')
+        self.mycursor.close()
 
     def get_page(self, page):
+        self.mycursor = self.mydb.cursor()
         self.mycursor.execute(f'SELECT * FROM pages where id="{page}"')
         myresult = self.mycursor.fetchone()
         return myresult[1].replace('||n', '\n')
+        self.mycursor.close()
